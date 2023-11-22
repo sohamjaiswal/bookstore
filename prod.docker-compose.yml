@@ -1,8 +1,8 @@
 version: "3.3"
 
 services:
-  kodski-app:
-    container_name: kodski-app
+  bookstore-app:
+    container_name: bookstore-app
     build: 
       context: .
       dockerfile: ./docker/prod/app.dockerfile

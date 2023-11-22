@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import Dog from '$lib/components/pets/dog/Dog.svelte';
 	import { LightSwitch, popup, storePopup, type DrawerSettings, getDrawerStore } from '@skeletonlabs/skeleton';
 	import Icon from '@iconify/svelte';
 	import type { SubmitFunction } from '@sveltejs/kit';
@@ -28,9 +27,6 @@
 <nav
 	class="card variant-glass-surface p-2 mt-7 h-12 fixed md:flex container mx-auto"
 >
-	<div class="pet-space absolute">
-		<Dog />
-	</div>
 	<button
 		class="btn btn-icon hamburger flex flex-col justify-evenly opacity-100 w-full sm:w-0 sm:opacity-0 transition-all duration-300"
 		on:click={() => {
@@ -44,7 +40,7 @@
 	>
 		<div class="flex gap-4">
 			<a class="btn btn-sm variant-ghost-surface" href="/" rel="noreferrer"> Home </a>
-			<a class="btn btn-sm variant-ghost-surface" href="/stuff" rel="noreferrer"> Stuff </a>
+			<a class="btn btn-sm variant-ghost-surface" href="/books" rel="noreferrer"> Books </a>
 		</div>
 		<div class="flex gap-4 items-center">
 			<button
@@ -97,10 +93,6 @@
 		.hamburger {
 			height: 100%;
 		}
-		.pet-space {
-				transform: translate(0, -135%);
-				width: calc(100% - 16px);
-			}
 		left: 16px;
 		transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
 		width: 48px;
@@ -110,10 +102,6 @@
 			width: calc(100% - 32px);
 			height: auto;
 			display: flex;
-			.pet-space {
-				transform: translate(0, -135%);
-				width: calc(100% - 16px);
-			}
 		}
 		@media (min-width: 768px) {
 			display: flex;

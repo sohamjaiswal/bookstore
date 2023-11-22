@@ -2,7 +2,7 @@ import type { PageLoad } from "../$types";
 
 export const load: PageLoad = async () => {
   try {
-    const stuffMd = await import("../../posts/stuff.svx")
+    const stuffMd = await import("../../posts/books.svx")
     return {
       content: stuffMd.default,
     }

@@ -1,0 +1,9 @@
+---
+title: Books!
+description: A little about books!
+date: '2023-11-22'
+categories: 
+  - Books
+published: true
+---
+You are cool! And so are books!
