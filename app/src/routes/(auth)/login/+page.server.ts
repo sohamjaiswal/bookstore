@@ -21,7 +21,7 @@ export const actions = {
             return fail(401, { email, password, invalid: true });
         }
 
-        const token = createToken(user);
+        const token = await createToken(user);
         cookies.set(JWT_COOKIE_NAME, token, {
             httpOnly: true,
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),

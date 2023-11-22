@@ -49,14 +49,7 @@
                     toastStore.trigger(t);
                 }
             }
-            else if (result.type === "redirect") {
-                const t: ToastSettings = {
-                    message: "Account created successfully.",
-                    background: 'variant-filled-success'
-                };
-                toastStore.trigger(t);
-                window.location.href = "/";
-            }
+            update()
 		};
     }
 </script>

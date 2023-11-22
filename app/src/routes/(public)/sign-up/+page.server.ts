@@ -25,7 +25,7 @@ export const actions = {
             });
 
             // sign a JWT token and set it as a cookie
-            const token = createToken(user);
+            const token = await createToken(user);
             cookies.set(JWT_COOKIE_NAME, token, {
                 httpOnly: true,
                 expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),

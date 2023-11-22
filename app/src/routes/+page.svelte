@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-
-	export let data;
+	console.log($page.data)
 </script>
 
 <div class="lg:flex snap-start items-center">

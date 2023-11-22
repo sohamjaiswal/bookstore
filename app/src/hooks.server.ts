@@ -18,19 +18,24 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	const token = event.cookies.get(JWT_COOKIE_NAME);
+	console.log("token", token)
     if (token) {
         try {
             const decoded = jwt.verify(token, env.JWT_SECRET);
-            const user = await prisma.user.findUnique({
-                where: { id: decoded.sub as string }
+            const userSession = await prisma.userSession.findUnique({
+                where: { id: decoded.sub as string },
+								include: { user: true }
             });
-            if (user) {
-                event.locals.user = user;
+						console.log("sessopm", userSession)
+            if (userSession?.user) {
+                event.locals.user = userSession.user;
             } else {
-                console.warn('User not found:', decoded.sub);
+                console.warn('Session not found:', decoded.sub);
+								prisma.userSession.delete({ where: { id: decoded.sub as string } });
                 event.cookies.delete(JWT_COOKIE_NAME, { path: '/' });
             }
-        } catch {
+        } catch (err)	{
+						console.warn('Invalid JWT:', err);
             event.cookies.delete(JWT_COOKIE_NAME, { path: '/' });
         }
     }
