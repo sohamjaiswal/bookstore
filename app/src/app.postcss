@@ -1,0 +1,89 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+/*place global styles here */
+
+@media (prefers-color-scheme: light) {
+	.shiki.monokai {
+		display: none;
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.shiki.material-lighter {
+		display: none;
+	}
+}
+
+html,
+body {
+	@apply h-full overflow-hidden;
+	cursor: default;
+	.shiki.monokai {
+		display: none;
+	}
+	.shiki.material-lighter {
+		display: block;
+	}
+	&.dark {
+		.shiki.material-lighter {
+			display: none;
+		}
+		.shiki.monokai {
+			display: block;
+		}
+	}
+}
+
+@font-face {
+	font-family: 'Quicksand';
+	src: url('/fonts/Quicksand.ttf');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Gotham Ultra';
+	src: url('/fonts/Gotham-Ultra.woff2');
+	font-display: swap;
+}
+
+.gotham-ultra {
+	font-family: 'Gotham Ultra';
+}
+
+span {
+	.custom-emoji {
+		width: 1.5em;
+		height: 1.5em;
+		vertical-align: -0.15em;
+		margin: 0 0.05em 0 0.1em;
+		/* display: inline-block; */
+	}
+}
+
+hgroup {
+	margin-bottom: 16px;
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6) {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+
+.prose p:not(:is(h2, h3, h4, h5, h6) + p) {
+	margin-top: 28px;
+}
+
+.prose :is(ul, ol) li {
+	margin-block: 8px;
+	padding-inline-start: 8px;
+}
+
+.prose pre {
+	max-inline-size: 100%;
+	padding: 12px;
+	border-radius: 8px;
+	tab-size: 2;
+}
