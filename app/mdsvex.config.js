@@ -101,12 +101,7 @@ export const mdsvexOptions = {
 	rehypePlugins: [
 		rehypeKatex,
 		[rehypeCustomEmoji, {
-			emojis: {
-				earperk: '/emojis/earperk.gif',
-				gigachad: '/emojis/gigachad.gif',
-				aqualove: '/emojis/aqualove.png',
-				zerotwo_hype: '/emojis/zerotwo_hype.gif',
-			},
+			emojis: {},
 			className: 'custom-emoji'
 		}],
 		rehypeAccessibleEmojis,
