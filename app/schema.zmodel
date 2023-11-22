@@ -1,0 +1,82 @@
+datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native"]
+}
+
+abstract model _base {
+    createdAt DateTime @default(now())
+    editedAt DateTime @default(now())
+}
+
+enum Role {
+    USER
+    SELLER
+    ADMIN
+}
+
+model User extends _base {
+    id String @id @default(cuid())
+    email String @unique @email
+    password String @password @omit @length(8, 16)
+    role Role @default(USER)
+    selling Book[]
+    sessions UserSession[]
+    carts Cart[] @relation("Cart")
+    // everybody can signup
+    @@allow('create,read', true)
+
+    // full access by self
+    @@allow('all', auth() == this)
+}
+
+model UserSession extends _base {
+  id String @id @unique @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model Book extends _base {
+    id String @id @default(cuid())
+    title String
+    author String
+    price Float
+    description String
+    image String
+    seller User @relation(fields: [sellerId], references: [id])
+    sellerId String
+    quantity Int
+    inCart CartItem[]
+    // everybody can read
+    @@allow('read', true)
+    // only seller can create, update, delete
+    @@allow('create,update,delete', auth() == this.seller)
+}
+
+model Cart extends _base {
+    id String @id @default(cuid())
+    user User @relation("Cart", fields: [userId], references: [id])
+    userId String
+    items CartItem[]
+    // everybody can read
+    @@allow('read', true)
+    // only user can create, update, delete
+    @@allow('create,update,delete', auth() == this.user)
+}
+
+model CartItem extends _base {
+    id String @id @default(cuid())
+    book Book @relation(fields: [bookId], references: [id])
+    bookId String
+    quantity Int
+    cart Cart @relation(fields: [cartId], references: [id])
+    cartId String
+    // everybody can read
+    @@allow('read', true)
+    // only user can create, update, delete
+    @@allow('create,update,delete', auth() == this.cart.user)
+}

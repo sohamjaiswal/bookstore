@@ -11,6 +11,10 @@ services:
       - 5173:5173
     volumes:
       - ./app:/app
+    environment:
+      - DATABASE_URL=postgresql://postgres:${DB_PASSWORD-password}@bookstore-db:${DB_PORT-5432}/postgres
+      - JWT_SECRET=${JWT_SECRET-secret}
+      - PROD=${PROD-false}
   bookstore-db:
     container_name: bookstore-db
     image: postgres:16-alpine

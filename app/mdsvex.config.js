@@ -4,7 +4,6 @@ import { findAndReplace } from "hast-util-find-and-replace";
 
 import remarkGfm from 'remark-gfm';
 import remarkUnwrapImages from 'remark-unwrap-images';
-import remarkMath from 'remark-math';
 import remarkEmoji from 'remark-emoji';
 import rehypeFormat from 'rehype-format';
 import rehypeAccessibleEmojis from 'rehype-accessible-emojis';
@@ -98,7 +97,7 @@ export const mdsvexOptions = {
 	},
 	highlight: shikiTwoslashHighlighter({themes: ['monokai', 'material-lighter']}),
 	// remarkgfm, remarkmath, rehypekatex not working
-	remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages, remarkEmoji],
+	remarkPlugins: [remarkGfm, remarkUnwrapImages, remarkEmoji],
 	rehypePlugins: [
 		rehypeKatex,
 		[rehypeCustomEmoji, {

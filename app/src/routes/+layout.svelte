@@ -25,7 +25,7 @@
 		<div class="flex flex-col items-center gap-8 w-full">
 			<div class="flex flex-col gap-4 mt-4 items-center w-full">
 				<a href="/">
-					<h2 class="h2">Kodski</h2>
+					<h2 class="h2">BookShop</h2>
 				</a>
 			</div>
 			<div class="flex flex-col items-center w-full gap-4">
