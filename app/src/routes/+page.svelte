@@ -1,9 +1,13 @@
 <script lang="ts">
+	import { page } from "$app/stores";
+
 	export let data;
 </script>
 
 <div class="lg:flex snap-start items-center">
-	<div class="prose text-inherit mb-20">
-		<svelte:component this={data.content} />
-	</div>
+	{#if $page.data.user}
+	Hi {$page.data.user.email}
+	{:else}
+	You are not signed in
+	{/if}
 </div>
