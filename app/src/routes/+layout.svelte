@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-	import { AppShell, Drawer, LightSwitch, initializeStores, popup } from '@skeletonlabs/skeleton';
+	import { AppShell, Drawer, LightSwitch, initializeStores, popup, Toast } from '@skeletonlabs/skeleton';
 	import Header from '$lib/fragments/Header/Header.svelte';
 	import Transition from '$lib/components/Transition.svelte';
 	import Icon from '@iconify/svelte';
@@ -20,6 +20,7 @@
 	};
 </script>
 
+<Toast />
 <Drawer>
 	<div class="flex flex-col justify-between h-full p-4">
 		<div class="flex flex-col items-center gap-8 w-full">
