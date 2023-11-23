@@ -109,7 +109,7 @@
 				All project files available on GitHub
 			</div> -->
 			<div class="flex justify-center text-center align-center">
-				I enjoyed making this, I hope you enjoyed reading it :D
+				We would like to thank CCET for giving this platform to us.
 			</div>
 		</div>
 	</svelte:fragment>
