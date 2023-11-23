@@ -60,7 +60,7 @@
 	    						</span>
 	    					</div>
 	    				</div>
-	    				<form action="" method="POST">
+	    				<form action="?/removeFromCart" method="POST">
 	    					<input type="hidden" name="id" value={book.id} />
 	    					<button class="btn variant-outline px-10" type="submit">
                                 Remove from cart

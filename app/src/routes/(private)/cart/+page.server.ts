@@ -1,4 +1,4 @@
-import { error, redirect } from "@sveltejs/kit"
+import { error, fail, redirect } from "@sveltejs/kit"
 
 export const load = async ({ locals }) => {
   if (!locals.user) {
@@ -32,5 +32,51 @@ export const load = async ({ locals }) => {
   return {
     books,
     totalPrice
+  }
+}
+
+export const actions = {
+  removeFromCart: async ({request, locals}) => {
+    if (!locals.user) {
+      throw redirect(302, '/login')
+    }
+
+    const data = await request.formData()
+    const bookId = data.get('id')
+
+    if (typeof bookId !== 'string') {
+      return fail(400, { bookId, missing: true })
+    }
+    
+    const db = locals.db
+
+    // get user cart 
+    const userId = locals.user.id
+    const cart = await db.cart.findFirst({
+      where: { 
+        userId: userId
+      }
+    })
+    if (!cart) {
+      throw error(404, 'No items in cart')
+    }
+
+    // get cart item
+    const cartItem = await db.cartItem.findFirst({
+      where: {
+        bookId: bookId,
+        cartId: cart.id
+      }
+    })
+    if (!cartItem) {
+      throw error(404, 'No items in cart')
+    }
+
+    // delete cart item
+    await db.cartItem.delete({
+      where: { id: cartItem.id }
+    })
+
+    throw redirect(302, '/cart')
   }
 }
