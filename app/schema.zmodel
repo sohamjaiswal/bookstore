@@ -38,6 +38,8 @@ model UserSession extends _base {
   id String @id @unique @default(uuid())
   user User @relation(fields: [userId], references: [id])
   userId String
+  // give all permissions to self
+  @@allow('all', auth() == this.user)
 }
 
 model Book extends _base {
