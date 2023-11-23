@@ -9,6 +9,7 @@
 	import { storeTheme } from '$lib/stores/stores';
 	import { themes } from '$lib/config';
 	import type { SubmitFunction } from '@sveltejs/kit';
+	import { page } from '$app/stores';
 	export let data
 	initializeStores();
 	const setTheme: SubmitFunction = ({ formData }) => {
@@ -33,6 +34,15 @@
 				<a class="btn btn-sm variant-ghost-surface" href="/" rel="noreferrer">🏡 Home </a>
 				<a class="btn btn-sm variant-ghost-surface" href="/stuff" rel="noreferrer">🪀 Stuff </a>
 				<a class="btn btn-sm variant-ghost-surface" href="/blog" rel="noreferrer">📜 Blog </a>
+				{#if $page.data.user}
+					<a class="btn btn-sm variant-ghost-surface" href="/profile" rel="noreferrer"> Profile </a>
+					<form class="flex-col flex gap-4" action="/logout" method="POST">
+						<button class="btn p-2 justify-center variant-ghost-surface " type="submit">Log out</button>
+					</form>
+				{:else}
+					<a class="btn btn-sm variant-ghost-surface" href="/login" rel="noreferrer"> Login </a>
+					<a class="btn btn-sm variant-ghost-surface" href="/sign-up" rel="noreferrer"> Sign Up </a>
+				{/if}
 			</div>
 		</div>
 			<div class="flex flex-col gap-4 items-center">

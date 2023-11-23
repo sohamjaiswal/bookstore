@@ -7,6 +7,7 @@
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { themes } from '$lib/config';
+	import { page } from '$app/stores';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 	const setTheme: SubmitFunction = ({ formData }) => {
 		const theme = formData.get('theme')?.toString();
@@ -84,6 +85,15 @@
 			</div>
 		</div>
 		<a class="btn btn-sm variant-ghost-surface" href="/blog" rel="noreferrer"> Blog </a>
+		{#if $page.data.user}
+			<a class="btn btn-sm variant-ghost-surface" href="/profile" rel="noreferrer"> Profile </a>
+			<form class="flex-col flex gap-4" action="/logout" method="POST">
+				<button class="btn p-2 justify-center variant-ghost-surface " type="submit">Log out</button>
+			</form>
+		{:else}
+			<a class="btn btn-sm variant-ghost-surface" href="/login" rel="noreferrer"> Login </a>
+			<a class="btn btn-sm variant-ghost-surface" href="/sign-up" rel="noreferrer"> Sign Up </a>
+		{/if}
 		</div>
 	</div>
 </nav>

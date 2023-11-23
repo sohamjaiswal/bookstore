@@ -18,7 +18,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	const token = event.cookies.get(JWT_COOKIE_NAME);
-	console.log("token", token)
     if (token) {
         try {
             const decoded = jwt.verify(token, env.JWT_SECRET);
@@ -26,7 +25,6 @@ export const handle: Handle = async ({ event, resolve }) => {
                 where: { id: decoded.sub as string },
 								include: { user: true }
             });
-						console.log("sessopm", userSession)
             if (userSession?.user) {
                 event.locals.user = userSession.user;
             } else {
