@@ -16,6 +16,7 @@ services:
       JWT_SECRET: ${JWT_SECRET:?JWT SECRET REQUIRED}
       PROD: ${PROD:?PROD PARAM REQUIRED}
       APP_PORT: ${APP_PORT}
+      NOT_VERCEL: true
   bookstore-db:
     container_name: bookstore-db
     image: postgres:16-alpine
