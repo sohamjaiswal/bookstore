@@ -15,7 +15,6 @@ abstract model _base {
 
 enum Role {
     USER
-    SELLER
     ADMIN
 }
 
@@ -24,7 +23,6 @@ model User extends _base {
     email String @unique @email
     password String @password @omit @length(8, 16)
     role Role @default(USER)
-    selling Book[]
     sessions UserSession[]
     carts Cart[] @relation("Cart")
     // everybody can signup
@@ -49,14 +47,11 @@ model Book extends _base {
     price Float
     description String
     image String
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
     quantity Int
     inCart CartItem[]
     // everybody can read
     @@allow('read', true)
-    // only seller can create, update, delete
-    @@allow('create,update,delete', auth() == this.seller)
+    @@allow('create,update,delete', auth().role == "ADMIN")
 }
 
 model Cart extends _base {

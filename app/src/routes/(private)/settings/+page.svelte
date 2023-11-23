@@ -8,9 +8,25 @@
   let cpwd: string;
 
   const handleSubmit: SubmitFunction = ({formElement, formData, action, cancel, submitter}) => {
+    if (pwd === '') {
+      const t: ToastSettings = {
+          message: 'Password should not be empty.',
+          background: 'variant-filled-error'
+      };
+      toastStore.trigger(t);
+      cancel();
+    }
     if (pwd !== cpwd) {
       const t: ToastSettings = {
           message: 'Passwords do not match.',
+          background: 'variant-filled-error'
+      };
+      toastStore.trigger(t);
+      cancel();
+    }
+    if (pwd.length < 8) {
+      const t: ToastSettings = {
+          message: 'Password should not be less than 8 characters.',
           background: 'variant-filled-error'
       };
       toastStore.trigger(t);
@@ -51,8 +67,8 @@
 <section class="container flex items-center justify-center h-[calc(100vh-256px)]">
     <form class="flex flex-col gap-9 card p-9 max-w-xl md:w-1/2" method="post" use:enhance={handleSubmit}>
         <h1 class="h1 text-center">Change Password</h1>
-        <input type="password" bind:value={pwd} name="password" id="pwd" placeholder="New Password..." class=" input border-0 rounded-2xl px-6 py-4">
-        <input type="password" bind:value={cpwd} name="confirmPassword" id="cnfpwd" placeholder="Confirm Password..." class=" input border-0 rounded-2xl px-6 py-4">
+        <input type="password" bind:value={pwd} name="password" id="pwd" placeholder="New Password..." class=" input border-0 rounded-2xl px-6 py-4" required>
+        <input type="password" bind:value={cpwd} name="confirmPassword" id="cnfpwd" placeholder="Confirm Password..." class=" input border-0 rounded-2xl px-6 py-4" required>
         <input type="submit" value="Continue" class="btn variant-filled max-w-fit place-self-center cursor-pointer font-bold">
     </form>
 </section>

@@ -15,7 +15,6 @@ generator client {
 
 enum Role {
     USER
-    SELLER
     ADMIN
 }
 
@@ -32,7 +31,6 @@ model User {
     /// @length(8, 16)
     password String
     role Role @default(USER)
-    selling Book[]
     sessions UserSession[]
     carts Cart[] @relation("Cart")
 }
@@ -47,7 +45,7 @@ model UserSession {
 }
 
 /// @@allow('read', true)
-/// @@allow('create,update,delete', auth() == this.seller)
+/// @@allow('create,update,delete', auth().role == 'ADMIN')
 model Book {
     createdAt DateTime @default(now())
     editedAt DateTime @default(now())
@@ -57,8 +55,6 @@ model Book {
     price Float
     description String
     image String
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
     quantity Int
     inCart CartItem[]
 }

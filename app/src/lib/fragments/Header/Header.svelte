@@ -41,7 +41,9 @@
 	>
 		<div class="flex gap-4">
 			<a class="btn btn-sm variant-ghost-surface" href="/" rel="noreferrer"> Home </a>
-			<a class="btn btn-sm variant-ghost-surface" href="/books" rel="noreferrer"> Books </a>
+			{#if $page.data.user && $page.data.user.role === 'ADMIN'}
+				<a class="btn btn-sm variant-ghost-surface" href="/admin-books" rel="noreferrer"> Manage books </a>
+			{/if}
 		</div>
 		<div class="flex gap-4 items-center">
 			<button
@@ -84,11 +86,11 @@
 				</nav>
 			</div>
 		</div>
-		<a class="btn btn-sm variant-ghost-surface" href="/blog" rel="noreferrer"> Blog </a>
 		{#if $page.data.user}
+			<a class="btn btn-sm variant-ghost-surface" href="/cart" rel="noreferrer"> Cart </a>
 			<a class="btn btn-sm variant-ghost-surface" href="/profile" rel="noreferrer"> Profile </a>
 			<form class="flex-col flex gap-4" action="/logout" method="POST">
-				<button class="btn p-2 justify-center variant-ghost-surface " type="submit">Log out</button>
+				<button class="btn px-4 justify-center variant-ghost-surface " type="submit">Log out</button>
 			</form>
 		{:else}
 			<a class="btn btn-sm variant-ghost-surface" href="/login" rel="noreferrer"> Login </a>

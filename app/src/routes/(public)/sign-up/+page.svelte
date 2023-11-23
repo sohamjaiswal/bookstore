@@ -17,6 +17,14 @@
             toastStore.trigger(t);
             cancel();
         }
+        if (pwd.length < 8) {
+            const t: ToastSettings = {
+                message: 'Password should be more than 8 characters.',
+                background: 'variant-filled-error'
+            };
+            toastStore.trigger(t);
+            cancel();
+        }
         if (!!email) {
             const t: ToastSettings = {
                 message: 'Enter an email.',

@@ -38,7 +38,7 @@ export const handle: Handle = async ({ event, resolve }) => {
         }
     }
     event.locals.db = enhance(prisma, {
-        user: event.locals.user ? { id: event.locals.user.id } : undefined
+        user: event.locals.user ? { ...event.locals.user } : undefined
     });
   
   return await resolve(event, {
